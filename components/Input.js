@@ -1,7 +1,7 @@
 import { StyleSheet, Text, TextInput, View } from 'react-native'
 import React, { useState } from 'react'
 
-export default function Input({label, value, onChangeText}) {
+export default function Input({label, value, onChangeText, error}) {
 
   return (
     <View style={styles.container}>
@@ -11,6 +11,7 @@ export default function Input({label, value, onChangeText}) {
         value={value}
         onChangeText={onChangeText}
         />
+      {error && <Text>{error}</Text>}
     </View>
   )
 }
@@ -28,15 +29,11 @@ const styles = StyleSheet.create({
         fontSize: 18,
         color: 'blue',
         textAlign:'center',
-        paddingBottom:8,
     },
 
     inputHeader:{
         color: 'blue',
         fontSize: 18,
-        alignSelf:'flex-start',
         marginBottom: '10%',
     },
-
-
 })
