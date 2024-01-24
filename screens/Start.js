@@ -1,22 +1,40 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import { SafeAreaView, StyleSheet, Text, View } from 'react-native'
+import React, { useState } from 'react'
 import Card from '../components/Card'
+import Input from '../components/Input'
 
 export default function Start() {
-  return (
-    <View style={styles.container}>
-      <Text style={styles.header}>Guess My Number</Text>
-      <Card />
+    //initialize userName
+    const[userName, setUserName] = useState("");
 
-    </View>
+    //iniitalize number
+    const[number, setNumber] = useState("");
+
+    return (
+        <SafeAreaView style={styles.container}>
+            <Text style={styles.header}>Guess My Number</Text>
+
+            <Card>
+                <Input
+                    label="Name"
+                    value={userName}
+                    onChangeText={(text) => setUserName(text)}
+                />
+                <Input
+                    label="Guess a Number"
+                    value={number}
+                    onChangeText={(text) => setNumber(text)}
+                />
+                
+            </Card>
+        </SafeAreaView>
   )
 }
 
 const styles = StyleSheet.create({
     container:{
         flex:1,
-        flexDirection: 'column',
-        alignItems:'center',
+        backgroundColor: 'gray',
         justifyContent:'center',
     },
 
