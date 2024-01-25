@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     },
 
     input:{
-        width:'100%',
+        width:250,
         borderBottomColor:'blue',
         borderBottomWidth:2,
         alignSelf:'flex-start',

@@ -4,7 +4,7 @@ import React from 'react'
 export default function Card({children}) {
   return (
     <View style={styles.card}>
-      <Text>{children}</Text>
+      {children}
     </View>
   )
 }
@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
         width:'80%',
         borderRadius:10,
         padding:12,
-        alignItems: 'center',
+        alignItems: 'flex-start',
         marginBottom:'30%',
         //IOS shadow:
         shadowColor:'gray',
