@@ -26,14 +26,17 @@ const styles = StyleSheet.create({
         width:'100%',
         borderBottomColor:'blue',
         borderBottomWidth:2,
+        alignSelf:'flex-start',
         fontSize: 18,
         color: 'blue',
         textAlign:'center',
+        paddingBottom:8,
     },
 
     inputHeader:{
         color: 'blue',
         fontSize: 18,
+        alignSelf:'flex-start',
         marginBottom: '10%',
     },
 })

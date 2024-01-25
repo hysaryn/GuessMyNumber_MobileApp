@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import Card from '../components/Card'
 import Input from '../components/Input'
 import CheckBox from '../components/CheckBox';
+import Color from '../components/Color';
 
 export default function Start() {
     //initialize userName
@@ -18,6 +19,8 @@ export default function Start() {
 
     const validateUserInput = () => {
         let isValid = true;
+        setNameError("");
+        setNumberError("");
 
         if (userName.length < 2 || !isNaN(userName)){
             setNameError("Please enter a valid name");
@@ -46,11 +49,12 @@ export default function Start() {
     }
 
     return (
+        <Color>
         <SafeAreaView style={styles.container}>
             <Text style={styles.header}>Guess My Number</Text>
 
             <Card>
-                <View styles={styles.componentView}>
+                <View style={styles.componentView}>
                     <Input
                         label="Name"
                         value={userName}
@@ -70,39 +74,47 @@ export default function Start() {
                         onChange={setIsChecked}
                     />
 
-                    <View styles={styles.buttonBox}>
-                        <Button color={'red'} title='Reset' onPress={handleReset} />
+                    <View styles={styles.buttonsContainer}>
+                        <Button style={styles.button} color={'red'} title='Reset' onPress={handleReset} />
                         <Button 
+                            style={styles.button}
                             color={'blue'} 
                             title='Confirm'
                             disabled={!isChecked} 
                             onPress={validateUserInput} />
                     </View>
-
-                </View>   
+                </View>  
             </Card>
         </SafeAreaView>
+        </Color>
   )
 }
 
 const styles = StyleSheet.create({
     container:{
         flex:1,
-        backgroundColor: 'pink',
+        flexDirection:'column',
+        alignItems:'center',
         justifyContent:'center',
     },
 
     header:{
-        color: 'purple',
-        fontSize:20,
-        marginBottom:'5%'
+        color: 'darkblue',
+        fontSize:24,
+        marginBottom:'10%'
     },
 
     componentView:{
-        flexDirection:'column',
+        flexDirection: 'column',
     },
 
-    bottonBox:{
+    buttonsContainer:{
         flexDirection:'row',
+    },
+
+    botton:{
+        justifyContent:'space-between',
+        width:'80%',
+        marginVertical:'5%',
     },
 })
