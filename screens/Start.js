@@ -5,13 +5,13 @@ import Input from '../components/Input'
 import CheckBox from '../components/CheckBox';
 import Color from '../components/Color';
 
-export default function Start() {
+export default function Start({name, guessNumber, onStart}) {
     //initialize userName
-    const[userName, setUserName] = useState("");
+    const[userName, setUserName] = useState(name);
     const[nameError, setNameError] = useState("");
 
     //initialize number
-    const[number, setNumber] = useState("");
+    const[number, setNumber] = useState(guessNumber);
     const[numberError, setNumberError] = useState("");
 
     //initialize checkbox state
@@ -38,15 +38,21 @@ export default function Start() {
         }
 
         return isValid;
-    }
+    };
 
     const handleReset = () => {
         setUserName("");
-        setNameError("")
+        setNameError("");
         setNumber("");
-        setNumberError("")
+        setNumberError("");
         setIsChecked(false);
-    }
+    };
+
+    const handleStart = () => {
+        if (validateUserInput()) {
+            onStart(userName, number);
+        }
+    };
 
     return (
         <Color>
@@ -79,7 +85,7 @@ export default function Start() {
                         color={'blue'} 
                         title='Confirm'
                         disabled={!isChecked} 
-                        onPress={validateUserInput} />
+                        onPress={handleStart} />
                 </View>
             </Card>
         </SafeAreaView>
