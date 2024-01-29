@@ -12,19 +12,63 @@ export default function App() {
   const [number, setNumber] = useState("");
   const [screen, setScreen] = useState('start');
 
+  const [gameState, setGameState] = useState('');
+  const [hint, setHint] = useState('');
+  const [guessCountLeft, setGuessCountLeft] = useState(3);
+  const [disabled, setDisabled] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const handleGame= (name, number) => {
+      setName(name); 
+      setNumber(number);
+
+      if (parseInt(number) === 1024){
+        setGameState('won');
+      } else {
+        setGameState('fail');
+        if (parseInt(number) > 1024){
+          setHint('Guess Lower!');
+        } else {
+          setHint('Guess Higher!');
+        }
+      };
+
+      setGuessCountLeft(guessCountLeft - 1);
+      if (guessCountLeft === 1){
+        setDisabled(true);
+      }
+      setScreen('game');
+      setModalVisible(true);
+      };
+
+      const reset = () => {
+        setName("");
+        setNumber("");
+        setGuessCountLeft(3);
+        setDisabled(false);
+        setScreen('start');
+      }
+
   return (
     <View style={styles.container}>
       {screen === 'start'? 
           <Start 
             name={name} 
-            guessNumber={number} 
-            onStart={(name, number) => {setName(name); setNumber(number); setScreen('game')}}/> 
+            guessNumber={number}
+            onStart={(name, number)=> handleGame(name, number)}/> 
           : (screen === 'game'? 
               <Game 
                 name={name} 
                 guessNumber={number}
-                setScreen={setScreen} /> 
-              : <Final />)}
+                gameState={gameState}
+                hint={hint}
+                guessCountLeft={guessCountLeft}
+                tryAgainDisabled={disabled}
+                setScreen={setScreen}
+                modalVisible={modalVisible}
+                setModalVisible={setModalVisible} /> 
+              : <Final 
+                reset={reset}/>)}
 
     </View>
   );
