@@ -4,8 +4,9 @@ import Card from '../components/Card'
 import Input from '../components/Input'
 import CheckBox from '../components/CheckBox';
 import Color from '../components/Color';
+import Game from './Game';
 
-export default function Start({name, guessNumber, onStart}) {
+export default function Start({name, guessNumber, setGuessNumber, countLeft, guessDisabled, screen}) {
     //initialize userName
     const[userName, setUserName] = useState(name);
     const[nameError, setNameError] = useState("");
@@ -16,6 +17,12 @@ export default function Start({name, guessNumber, onStart}) {
 
     //initialize checkbox state
     const[isChecked, setIsChecked] = useState(false);
+
+    const [isModalVisible, setIsModalVisible] = useState(false);
+    const [gameState, setGameState] = useState('');
+    const [hint, setHint] = useState('');
+    const [guessCountLeft, setGuessCountLeft] = useState(countLeft);
+    const [disabled, setDisabled] = useState(guessDisabled);
 
     const validateUserInput = () => {
         let isValid = true;
@@ -50,9 +57,33 @@ export default function Start({name, guessNumber, onStart}) {
 
     const handleStart = () => {
         if (validateUserInput()) {
-            onStart(userName, number);
+            handleGame(userName, number);
         }
     };
+
+    const handleGame= (name, number) => {
+        setUserName(name); 
+        setNumber(number);
+        setGuessNumber(number);
+  
+        if (parseInt(number) === 1024){
+          setGameState('won');
+        } else {
+          setGameState('fail');
+          if (parseInt(number) > 1024){
+            setHint('Guess Lower!');
+          } else {
+            setHint('Guess Higher!');
+          }
+        };
+  
+        setGuessCountLeft(guessCountLeft - 1);
+        if (guessCountLeft === 1){
+          setDisabled(true);
+        }
+
+        setIsModalVisible(true);
+        };
 
     return (
         <Color>
@@ -88,6 +119,17 @@ export default function Start({name, guessNumber, onStart}) {
                         onPress={handleStart} />
                 </View>
             </Card>
+            <Game
+                name={userName} 
+                guessNumber={number}
+                gameState={gameState}
+                hint={hint}
+                guessCountLeft={guessCountLeft}
+                setCheckBox={setIsChecked}
+                tryAgainDisabled={disabled}
+                gameScreen={screen}
+                modalVisible={isModalVisible}
+                setModalVisible={setIsModalVisible} />
         </SafeAreaView>
         </Color>
   )

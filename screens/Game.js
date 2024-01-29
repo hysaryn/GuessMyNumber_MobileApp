@@ -3,25 +3,25 @@ import React, { useState } from 'react'
 import Color from '../components/Color'
 import Card from '../components/Card'
 
-export default function Game({name, guessNumber, gameState, hint, guessCountLeft, setScreen, tryAgainDisabled, modalVisible, setModalVisible}) {
+export default function Game({name, guessNumber,gameState, hint, guessCountLeft, gameScreen, setCheckBox, tryAgainDisabled, modalVisible, setModalVisible}) {
 
     const handleWin = () => {
-        setModalVisible(false);
-        setScreen('final');
+        setModalVisible('false');
+        gameScreen('final');
     }
 
     const handleLost = () => {
-        setModalVisible(false);
-        setScreen('final');
+        setModalVisible('false');
+        gameScreen('final');
     }
 
     const handleTryAgain = () => {
-        setModalVisible(false);
-        setScreen('start');
+        setCheckBox(false);
+        setModalVisible('false');
     }
 
     return (
-        //<Modal visible={modalVisible}>
+        <Modal visible={modalVisible}>
             <Color>
             <SafeAreaView style={styles.container}>
             <Card>
@@ -52,7 +52,7 @@ export default function Game({name, guessNumber, gameState, hint, guessCountLeft
             </Card>
             </SafeAreaView>
             </Color>
-        //</Modal>
+        </Modal>
     )
 }
 

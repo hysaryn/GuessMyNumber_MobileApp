@@ -11,20 +11,19 @@ export default function Final({guessNumber, reset}) {
             <Text style={styles.header}>Game is Over</Text>
             <Card>
                 <View style={styles.cardContainer}>
-                    <Text style={styles.cardHeader}>Here's your picture:</Text>
+                    <Text style={styles.cardHeader}>  Here's your picture</Text>
                     {parseInt(guessNumber) === 1024?
                     <Image 
                         source={{
                             uri: "https://picsum.photos/id/1024/100/100",}}
                         style={styles.image}/> :
                     <Image 
-                        source={require("../assets/sad-face.jpeg")}
+                        source={require("../assets/sad-face.png")}
                         style={styles.image}/>}
                     <Button 
                         color='blue'
                         title='Start Again' 
-                        onPress={reset}
-                        style={styles.button} />
+                        onPress={reset} />
                 </View>
             </Card>
         </SafeAreaView>
@@ -53,14 +52,15 @@ const styles = StyleSheet.create({
     },
 
     image: {
-        width: 200,
-        height: 200,
+        width: 190,
+        height: 190,
         alignSelf:'center',
+        marginBottom:'10%',
       },
 
     cardContainer:{
         flexDirection:'column',
         alignSelf:'center',
         marginTop:'10%',
-    }
+    },
 })
