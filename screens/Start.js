@@ -18,6 +18,7 @@ export default function Start({name, guessNumber, setGuessNumber, countLeft, gue
     //initialize checkbox state
     const[isChecked, setIsChecked] = useState(false);
 
+    //initialize game state
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [gameState, setGameState] = useState('');
     const [hint, setHint] = useState('');
@@ -29,11 +30,13 @@ export default function Start({name, guessNumber, setGuessNumber, countLeft, gue
         setNameError("");
         setNumberError("");
 
+        //set name error if it is numeric or it is only one character
         if (userName.length < 2 || !isNaN(userName)){
             setNameError("Please enter a valid name");
             isValid = false;
         }
 
+        //set number error if the input is not a number or length is not 4
         if (isNaN(number) ||number.length !== 4){
             setNumberError("Please enter a valid number")
             isValid = false;
@@ -64,6 +67,7 @@ export default function Start({name, guessNumber, setGuessNumber, countLeft, gue
     const handleGame= (name, number) => {
         setUserName(name); 
         setNumber(number);
+        //send guess number back to app
         setGuessNumber(number);
   
         if (parseInt(number) === 1024){

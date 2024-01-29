@@ -5,8 +5,8 @@ import { useState } from 'react';
 import Start from './screens/Start';
 import Final from './screens/Final';
 
-
 export default function App() {
+  //initialize name and number
   const [name, setName] = useState("");
   const [number, setNumber] = useState("");
   const [screen, setScreen] = useState('start');

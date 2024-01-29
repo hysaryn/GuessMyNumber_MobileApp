@@ -11,7 +11,7 @@ export default function Input({label, value, onChangeText, error}) {
         value={value}
         onChangeText={onChangeText}
         />
-      {error && <Text>{error}</Text>}
+      {error && <Text style={styles.errorMessage}>{error}</Text>}
     </View>
   )
 }
@@ -39,4 +39,9 @@ const styles = StyleSheet.create({
         alignSelf:'flex-start',
         marginBottom: '10%',
     },
+
+    errorMessage: {
+      color:'dimgrey',
+      fontSize: 18,
+    }
 })
