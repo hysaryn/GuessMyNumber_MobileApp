@@ -67,9 +67,9 @@ export default function App() {
                 setScreen={setScreen}
                 modalVisible={modalVisible}
                 setModalVisible={setModalVisible} /> 
-              : <Final 
+              : <Final
+                guessNumber={number}
                 reset={reset}/>)}
-
     </View>
   );
 }
