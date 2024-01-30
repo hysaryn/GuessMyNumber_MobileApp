@@ -1,11 +1,39 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, TextInput, View } from 'react-native';
+import { useState } from 'react';
+
+import Start from './screens/Start';
+import Final from './screens/Final';
 
 export default function App() {
+  //initialize name and number
+  const [name, setName] = useState("");
+  const [number, setNumber] = useState("");
+  const [screen, setScreen] = useState('start');
+  const [guessCountLeft, setGuessCountLeft] = useState(3);
+  const [disabled, setDisabled] = useState(false);
+
+  const reset = () => {
+      setName("");
+      setNumber("");
+      setGuessCountLeft(3);
+      setDisabled(false);
+      setScreen('start');
+  }
+
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+      {screen === 'start'? 
+          <Start 
+            name={name} 
+            guessNumber={number}
+            setGuessNumber={setNumber}
+            countLeft={guessCountLeft}
+            guessDisabled={disabled}
+            screen={setScreen}/> 
+          : <Final
+              guessNumber={number}
+              reset={reset}/>}
     </View>
   );
 }
@@ -16,5 +44,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+
+  input:{
+    color:"purple",
   },
 });
