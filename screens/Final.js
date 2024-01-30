@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     header:{
         color: 'darkblue',
         fontSize:24,
-        marginBottom:'10%'
+        paddingBottom:'10%'
     },
 
     cardHeader:{
